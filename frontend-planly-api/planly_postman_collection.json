@@ -1,0 +1,976 @@
+{
+	"info": {
+		"_postman_id": "8b9e6fa4-8977-4cf0-bb46-a4c3f59e51dc",
+		"name": "Planly API Collection",
+		"description": "Koleksi endpoint REST API lengkap untuk aplikasi Planly (Ruang Kerja Akademik Mahasiswa). Menggunakan Laravel Sanctum untuk autentikasi Bearer Token.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Arief Sidik Wijayanto\",\n    \"email\": \"arfwjn@gmail.com\",\n    \"password\": \"ariefsidikpassword\",\n    \"password_confirmation\": \"ariefsidikpassword\",\n    \"nim\": \"STI202303494\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.environment.set(\"token\", jsonData.token);",
+									"    pm.collectionVariables.set(\"token\", jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"arfwjn@gmail.com\",\n    \"password\": \"ariefsidikpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile (POST)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Arief Sidik Wijayanto\",\n    \"nim\": \"STI202303494\",\n    \"semester\": 6,\n    \"major\": \"Teknik Informatika\",\n    \"gpa_current\": 3.60,\n    \"gpa_target\": 3.80,\n    \"target_study_hours\": 2,\n    \"address\": \"Purwokerto, Jawa Tengah\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/profile/update",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Arief Sidik Wijayanto\",\n    \"nim\": \"STI202303494\",\n    \"semester\": 6,\n    \"major\": \"Teknik Informatika\",\n    \"gpa_current\": 3.60,\n    \"gpa_target\": 3.80,\n    \"target_study_hours\": 2,\n    \"address\": \"Purwokerto, Jawa Tengah\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Get All Courses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_code\": \"SWU001\",\n    \"course_name\": \"Website Programming Lanjut\",\n    \"sks\": 4,\n    \"lecturer_name\": \"Sunaryono M.Kom\",\n    \"room\": \"KB. Ruang 2.3\",\n    \"day_of_week\": \"Wednesday\",\n    \"start_time\": \"17:00\",\n    \"end_time\": \"18:00\",\n    \"color_hex\": \"#3525cd\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/courses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/courses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_code\": \"SWU001\",\n    \"course_name\": \"Website Programming Lanjut (Updated)\",\n    \"sks\": 4,\n    \"lecturer_name\": \"Sunaryono M.Kom\",\n    \"room\": \"KB. Ruang 2.5\",\n    \"day_of_week\": \"Wednesday\",\n    \"start_time\": \"16:30\",\n    \"end_time\": \"18:00\",\n    \"color_hex\": \"#3525cd\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/courses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/courses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks by Course",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?course_id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_id\": 1,\n    \"task_title\": \"Membuat UI Login & Register di Flutter\",\n    \"description\": \"Implementasi halaman login dan register menggunakan Flutter dengan validasi form, integrasi API, dan state management Provider.\",\n    \"deadline\": \"2026-06-10 23:59:00\",\n    \"is_priority\": true,\n    \"attachments\": [\n        {\n            \"name\": \"mock_flutter_guidelines.pdf\",\n            \"type\": \"application/pdf\",\n            \"size\": 14520,\n            \"data_url\": \"data:application/pdf;base64,JVBERi...\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task_title\": \"Membuat UI Login & Register di Flutter (REVISI)\",\n    \"description\": \"Implementasi halaman login dan register menggunakan Flutter dengan validasi form, integrasi API, dan state management Provider.\",\n    \"deadline\": \"2026-06-10 23:59:00\",\n    \"is_priority\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finish Task (Checklist Status)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/1/finish",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"1",
+								"finish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Get All Notes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/notes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_id\": 3,\n    \"title\": \"Catatan Materi AI - Pertemuan 4\",\n    \"content\": \"Algoritma pencarian: BFS (Breadth-First Search) dan DFS (Depth-First Search) adalah dasar dari algoritma pencarian pada graf. Heuristik digunakan pada informed search seperti A* dan Greedy Best-First Search untuk meningkatkan efisiensi pencarian.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Note Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/notes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Note",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Catatan Materi AI - Pertemuan 4 (Revisi)\",\n    \"content\": \"Algoritma pencarian: BFS (Breadth-First Search) dan DFS (Depth-First Search) revisi.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Note",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/notes/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get All Events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event_name\": \"Seminar Nasional AI & Web Development\",\n    \"category\": \"seminar\",\n    \"description\": \"Seminar nasional mengenai masa depan Web Development di era kecerdasan buatan.\",\n    \"event_date\": \"2026-06-09\",\n    \"start_time\": \"09:00\",\n    \"end_time\": \"12:00\",\n    \"location\": \"Auditorium SWU Lantai 3\",\n    \"organizer\": \"Himpunan Mahasiswa Informatika\",\n    \"color_hex\": \"#6366F1\",\n    \"is_important\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": \"Auditorium Gedung Utama Lantai 2\",\n    \"is_important\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/events/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reschedules",
+			"item": [
+				{
+					"name": "Get All Reschedules",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/reschedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reschedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Reschedule",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_id\": 1,\n    \"original_date\": \"2026-06-09\",\n    \"new_date\": null,\n    \"new_start_time\": null,\n    \"new_end_time\": null,\n    \"is_canceled\": true,\n    \"note\": \"Pertemuan perdana dibatalkan karena dosen rapat rektorat\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/reschedules",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reschedules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Reschedule (Restore Normal)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/reschedules/1/2026-06-09",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reschedules",
+								"1",
+								"2026-06-09"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "Get All Attendance",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/attendance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Attendance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"course_id\": 1,\n    \"course_code\": \"SWU001\",\n    \"course_name\": \"Website Programming Lanjut\",\n    \"date\": \"2026-06-09\",\n    \"time\": \"17:05:12\",\n    \"status\": \"Hadir\",\n    \"latitude\": -6.9825,\n    \"longitude\": 110.4091,\n    \"image_base64\": \"data:image/jpeg;base64,/9j/4AAQSkZJRg...\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/attendance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Attendance",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/attendance/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attendance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_bearer_token_here",
+			"type": "string"
+		}
+	]
+}

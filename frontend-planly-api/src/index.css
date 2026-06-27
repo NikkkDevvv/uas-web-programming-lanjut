@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+:root {
+  --color-primary: #3525cd;
+  --color-primary-container: #dad7ff;
+  --color-secondary-container: #d0e1fb;
+  --color-surface: #fcf8ff;
+  --color-on-surface: #1b1b24;
+  --color-on-surface-variant: #464555;
+  --color-outline-variant: #c7c4d8;
+  
+  --color-card-bg: #ffffff;
+  --color-card-border: #e2e8f0;
+  --color-input-bg: #f8fafc;
+
+  --color-header-bg: rgba(255, 255, 255, 0.85);
+  --color-header-border: #e2e8f0;
+
+  --color-date-btn-bg: rgba(241, 245, 249, 0.5);
+  --color-date-btn-border: #f1f5f9;
+
+  /* shadcn semantic tokens */
+  --color-background: #fcf8ff;
+  --color-foreground: #1b1b24;
+  --color-muted: #f1f5f9;
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+
+  /* Alert Toast color tokens */
+  --color-warning: hsl(48 96% 59%);
+  --color-warning-foreground: hsl(48 96% 5%);
+  --color-success: hsl(142.1 76.2% 36.3%);
+  --color-success-foreground: hsl(142.1 76.2% 95%);
+  --color-info: hsl(215 91% 54%);
+  --color-info-foreground: hsl(215 91% 95%);
+}
+
+.dark {
+  --color-primary: #4f46e5;
+  --color-primary-container: #1e1b4b;
+  --color-secondary-container: #1e293b;
+  --color-surface: #0b0f19;
+  --color-on-surface: #f3f4f6;
+  --color-on-surface-variant: #94a3b8;
+  --color-outline-variant: #334155;
+  
+  --color-card-bg: #111827;
+  --color-card-border: #1f2937;
+  --color-input-bg: #1f2937;
+
+  --color-header-bg: rgba(11, 15, 25, 0.85);
+  --color-header-border: var(--color-card-border);
+
+  --color-date-btn-bg: var(--color-surface);
+  --color-date-btn-border: var(--color-card-border);
+
+  /* shadcn semantic tokens (dark) */
+  --color-background: #0b0f19;
+  --color-foreground: #f3f4f6;
+  --color-muted: #1e293b;
+  --color-destructive: hsl(0 62% 50%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+
+  /* Alert Toast color tokens (dark) */
+  --color-warning: hsl(48 96% 59%);
+  --color-warning-foreground: hsl(48 96% 5%);
+  --color-success: hsl(142.1 76.2% 36.3%);
+  --color-success-foreground: hsl(142.1 76.2% 95%);
+  --color-info: hsl(215 91% 54%);
+  --color-info-foreground: hsl(215 91% 95%);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: var(--color-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-secondary-container: var(--color-secondary-container);
+  --color-surface: var(--color-surface);
+  --color-on-surface: var(--color-on-surface);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-outline-variant: var(--color-outline-variant);
+
+  --color-header-bg: var(--color-header-bg);
+  --color-header-border: var(--color-header-border);
+  --color-date-btn-bg: var(--color-date-btn-bg);
+  --color-date-btn-border: var(--color-date-btn-border);
+
+  /* shadcn semantic colors */
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-muted: var(--color-muted);
+  --color-destructive: var(--color-destructive);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+  --color-warning: var(--color-warning);
+  --color-warning-foreground: var(--color-warning-foreground);
+  --color-success: var(--color-success);
+  --color-success-foreground: var(--color-success-foreground);
+  --color-info: var(--color-info);
+  --color-info-foreground: var(--color-info-foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+/* Overrides utilitas untuk transisi tema gelap otomatis */
+.dark body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+/* Transisi halus saat perpindahan tema untuk elemen-elemen tertentu */
+.bg-white, .bg-slate-50, .border, .text-on-surface, .text-on-surface-variant, aside, header, main, div, button, input, textarea, select {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dark .bg-white {
+  background-color: var(--color-card-bg) !important;
+}
+
+.dark .bg-white\/85 {
+  background-color: rgba(11, 15, 25, 0.85) !important;
+}
+
+.dark .bg-white\/90 {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+}
+
+.dark .bg-slate-50\/50 {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-card-border) !important;
+}
+
+.dark .bg-\[\#F8FAFC\],
+.dark .bg-\[\#F1F5F9\],
+.dark .bg-slate-50,
+.dark .bg-surface {
+  background-color: var(--color-input-bg) !important;
+}
+
+.dark .border,
+.dark .border-t,
+.dark .border-b,
+.dark .border-l,
+.dark .border-r,
+.dark .border-\[\#E2E8F0\],
+.dark .border-slate-100,
+.dark .border-\[\#C7C4D8\] {
+  border-color: var(--color-card-border) !important;
+}
+
+.dark .text-on-surface {
+  color: var(--color-on-surface) !important;
+}
+
+.dark .text-on-surface-variant {
+  color: var(--color-on-surface-variant) !important;
+}
+
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-\[\#F1F5F9\]:hover,
+.dark .hover\:bg-primary\/\[0\.04\]:hover,
+.dark .hover\:bg-\[\#F1F5F9\]:hover {
+  background-color: var(--color-input-bg) !important;
+}
+
+.dark .bg-\[\#F5F2FF\] {
+  background-color: var(--color-primary-container) !important;
+  color: var(--color-primary) !important;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--color-outline-variant);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #c7c4d8;
+  border-radius: 9999px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toast-in {
+  animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Override browser default autofill backgrounds to match the theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-input-bg) inset !important;
+  -webkit-text-fill-color: var(--color-on-surface) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Hilangkan tombol naik turun bawaan browser pada input type number secara menyeluruh */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+/* =============================================================================
+   Planly — Interactive Premium Button Animations
+   ============================================================================= */
+
+/* Efek hover & tap interaktif premium untuk tombol biasa se-aplikasi */
+button:not(.empty-state-btn):not(.no-animate):not([disabled]) {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+button:not(.empty-state-btn):not(.no-animate):not([disabled]):hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+button:not(.empty-state-btn):not(.no-animate):not([disabled]):active {
+  transform: translateY(0px) scale(0.96);
+}
+
+/* Animasi ayunan ikon dalam tombol biasa saat hover */
+button:not(.empty-state-btn):not(.no-animate):not([disabled]):hover svg {
+  animation: button-icon-swing 0.5s ease-in-out forwards;
+}
+
+@keyframes button-icon-swing {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-15deg) scale(1.15);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.15);
+  }
+  75% {
+    transform: rotate(-5deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(0deg) scale(1.15);
+  }
+}
+
+/* Utilitas menyembunyikan scrollbars secara lintas-browser */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;  /* IE dan Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* Custom Scrollbar Utility */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent; /* Slate-400 thumb in light mode */
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: rgba(71, 85, 105, 0.5) transparent; /* Slate-600 thumb in dark mode */
+}
+
+/* Chrome, Edge, Safari support */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.4); /* slate-400 equivalent with opacity */
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.6);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(71, 85, 105, 0.5); /* slate-600 equivalent with opacity */
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(71, 85, 105, 0.7);
+}
+
+/* Custom Console Terminal Theme */
+.console-terminal {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+.dark .console-terminal {
+  background-color: #020617 !important; /* Slate-950 (original black) */
+  border-color: #1e293b !important; /* Slate-800 */
+}
